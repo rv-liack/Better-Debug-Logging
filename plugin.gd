@@ -1,6 +1,8 @@
+## Editor plugin that registers [LoggerRegistry] as an autoload singleton on activation.
 @tool
 extends EditorPlugin
 
+## Name used for the autoload singleton.
 const AUTOLOAD_NAME = "LoggerRegistry"
 
 func _enter_tree() -> void:
