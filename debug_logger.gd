@@ -1,5 +1,5 @@
 ## Lightweight logger with colored console output and log level support.
-##
+## 
 ## Provides [member LogLevel.INFO], [member LogLevel.WARNING] and [member LogLevel.ERROR]
 ## levels with distinct colors. Supports an optional prefix and rich BBCode formatting
 ## via [method @GDScript.print_rich].

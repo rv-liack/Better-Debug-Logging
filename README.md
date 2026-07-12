@@ -1,60 +1,60 @@
-# Better Debug Loggin
+# Better Debug Logging
 
-Plugin para Godot 4 que extiende el sistema de depuración en consola con mensajes con formato, colores y niveles de log.
+Godot 4 plugin that extends the console debugging system with formatted messages, colors, and log levels.
 
-## Características
+## Features
 
-- Mensajes formateados con colores en la consola del editor (`print_rich`)
-- Tres niveles de log: `INFO`, `WARNING`, `ERROR`
-- Los niveles `WARNING` y `ERROR` también se registran con `push_warning()` / `push_error()`
-- Sistema de canales (loggers independientes con prefijos personalizados)
-- Registro global (`LoggerRegistry`) disponible como autoload singleton
-- Dos implementaciones: `DebugLogger` (RefCounted) y `Logger` (Node)
+- Formatted messages with colors in the editor console (`print_rich`)
+- Three log levels: `INFO`, `WARNING`, `ERROR`
+- `WARNING` and `ERROR` levels also log via `push_warning()` / `push_error()`
+- Channel system (independent loggers with custom prefixes)
+- Global registry (`LoggerRegistry`) available as an autoload singleton
+- Two implementations: `DebugLogger` (RefCounted) and `Logger` (Node)
 
-## Instalación
+## Installation
 
-1. Copia la carpeta `better_debug_logging` en `res://addons/` de tu proyecto.
-2. Habilita el plugin en **Proyecto > Configuración del proyecto > Plugins**.
+1. Copy the `better_debug_logging` folder into your project's `res://addons/`.
+2. Enable the plugin in **Project > Project Settings > Plugins**.
 
-El plugin registrará automáticamente el singleton `LoggerRegistry`.
+The plugin will automatically register the `LoggerRegistry` singleton.
 
-## Uso
+## Usage
 
-### LoggerRegistry (autoload global)
+### LoggerRegistry (global autoload)
 
 ```gdscript
-# Logger por defecto con prefijo "DEBUG"
-LoggerRegistry.get_default().info("Juego iniciado")
-LoggerRegistry.get_default().warning("Poca memoria disponible")
-LoggerRegistry.get_default().error("No se pudo cargar el recurso")
+# Default logger with "DEBUG" prefix
+LoggerRegistry.get_default().info("Game started")
+LoggerRegistry.get_default().warning("Low memory available")
+LoggerRegistry.get_default().error("Failed to load resource")
 
-# Canales con prefijo personalizado
+# Channels with custom prefix
 var combat_logger = LoggerRegistry.channel("COMBAT")
-combat_logger.info("Jugador ataca con 50 de daño")
+combat_logger.info("Player attacks for 50 damage")
 ```
 
-### DebugLogger (instancia directa)
+### DebugLogger (direct instance)
 
 ```gdscript
-var log = DebugLogger.new("MI_MODULO")
-log.info("Esto es un mensaje informativo")
-log.warning("Esto es una advertencia")
-log.error("Esto es un error")
+var log = DebugLogger.new("MY_MODULE")
+log.info("This is an informational message")
+log.warning("This is a warning")
+log.error("This is an error")
 
-# Mostrar mensaje sin prefijo ni nivel
-log.simple("Mensaje plano sin formato")
+# Print a message without prefix or level
+log.simple("Plain unformatted message")
 
-# Ocultar el prefijo
+# Hide the prefix
 log.set_prefix_visible(false)
 ```
 
-### Logger (alternativa basada en Node)
+### Logger (Node-based alternative)
 
 ```gdscript
 var log = Logger.new()
-log.set_prefix("MODULO")
-log.info("Mensaje")
-log.warning("Advertencia")
+log.set_prefix("MODULE")
+log.info("Message")
+log.warning("Warning")
 log.error("Error")
 ```
 
@@ -62,27 +62,27 @@ log.error("Error")
 
 ### DebugLogger
 
-| Método | Descripción |
+| Method | Description |
 |--------|-------------|
-| `info(...args)` | Log nivel INFO (cian) |
-| `warning(...args)` | Log nivel WARNING (amarillo) + `push_warning()` |
-| `error(...args)` | Log nivel ERROR (rojo) + `push_error()` |
-| `simple(...args)` | Mensaje plano sin formato |
-| `set_prefix_visible(enabled)` | Muestra/oculta el prefijo |
+| `info(...args)` | INFO level log (cyan) |
+| `warning(...args)` | WARNING level log (yellow) + `push_warning()` |
+| `error(...args)` | ERROR level log (red) + `push_error()` |
+| `simple(...args)` | Plain unformatted message |
+| `set_prefix_visible(enabled)` | Show/hide the prefix |
 
 ### LoggerRegistry
 
-| Método | Descripción |
+| Method | Description |
 |--------|-------------|
-| `get_default()` | Devuelve el logger por defecto (`DEBUG`) |
-| `channel(name)` | Obtiene o crea un logger con el prefijo dado |
+| `get_default()` | Returns the default logger (`DEBUG`) |
+| `channel(name)` | Gets or creates a logger with the given prefix |
 
-## Colores por nivel
+## Colors by level
 
-- **INFO** → cian
-- **WARNING** → amarillo
-- **ERROR** → rojo
+- **INFO** → cyan
+- **WARNING** → yellow
+- **ERROR** → red
 
-## Licencia
+## License
 
-MIT - Ver [LICENSE](LICENSE).
+MIT - See [LICENSE](LICENSE).
